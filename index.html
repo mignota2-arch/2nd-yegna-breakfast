@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yegna Breakfast | Ethiopian Breakfast & Ordering</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <style>
+    :root{
+      --green:#2c7e18;
+      --green-2:#1f7a36;
+      --yellow:#f4c542;
+      --cream:#fff8ea;
+      --dark:#1f1f1f;
+      --white:#ffffff;
+      --red:#c0392b;
+      --gray:#6b7280;
+      --shadow:0 10px 25px rgba(0,0,0,0.08);
+      --radius:18px;
+    }
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      scroll-behavior:smooth;
+    }
+
+    body{
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--cream);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    img{
+      max-width:100%;
+      display:block;
+      border-radius:16px;
+    }
+
+    a{
+      text-decoration:none;
+      color:inherit;
+    }
+
+    button, input, select, textarea{
+      font:inherit;
+    }
+
+    .container{
+      width:min(1100px, 92%);
+      margin:auto;
+    }
+
+    .topbar{
+      background: var(--green);
+      color: var(--white);
+      padding: 14px 0;
+      position: sticky;
+      top:0;
+      z-index:1000;
+      box-shadow: var(--shadow);
+    }
+
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+
+    .brand{
+      font-size:1.5rem;
+      font-weight:700;
+      color: var(--yellow);
+    }
+
+    .brand span{
+      color: var(--white);
+    }
+
+    .nav-links{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    .nav-links a, .nav-links button{
+      background: transparent;
+      border:none;
+      color:var(--white);
+      padding:10px 14px;
+      border-radius:12px;
+      cursor:pointer;
+      transition:0.25s;
+    }
+
+    .nav-links a:hover, .nav-links button:hover{
+      background: rgba(255,255,255,0.12);
+    }
+
+    .cta-btn{
+      background: var(--yellow) !important;
+      color: var(--dark) !important;
+      font-weight:700;
+    }
+
+    .hero{
+      padding:70px 0 40px;
+    }
+
+    .hero-wrap{
+      display:grid;
+      grid-template-columns:1.1fr 0.9fr;
+      gap:28px;
+      align-items:center;
+    }
+
+    .hero-text h1{
+      font-size: clamp(2rem, 5vw, 3.7rem);
+      line-height:1.1;
+      margin-bottom:14px;
+      color: var(--green);
+    }
+
+    .hero-text p{
+      margin-bottom:20px;
+      font-size:1.05rem;
+    }
+
+    .hero-badges{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:20px;
+    }
+
+    .badge{
+      background: var(--white);
+      border:1px solid #eee;
+      padding:8px 12px;
+      border-radius:999px;
+      box-shadow: var(--shadow);
+      font-size:0.95rem;
+    }
+
+    .hero-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      border:none;
+      padding:12px 18px;
+      border-radius:14px;
+      cursor:pointer;
+      font-weight:700;
+      transition:0.25s;
+    }
+
+    .btn-primary{
+      background: var(--green);
+      color: var(--white);
+    }
+
+    .btn-primary:hover{
+      background: var(--green-2);
+    }
+
+    .btn-secondary{
+      background: var(--yellow);
+      color: var(--dark);
+    }
+
+    .btn-danger{
+      background: var(--red);
+      color: var(--white);
+    }
+
+    .hero-card{
+      background: var(--white);
+      padding:18px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .section{
+      padding:50px 0;
+    }
+
+    .section-title{
+      font-size:2rem;
+      color:var(--green);
+      margin-bottom:10px;
+    }
+
+    .section-subtitle{
+      color:var(--gray);
+      margin-bottom:24px;
+    }
+
+    .grid{
+      display:grid;
+      gap:20px;
+    }
+
+    .menu-grid{
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    }
+
+    .card{
+      background: var(--white);
+      border-radius: var(--radius);
+      padding:16px;
+      box-shadow: var(--shadow);
+    }
+
+    .menu-card h3{
+      margin:12px 0 6px;
+      color:var(--green);
+    }
+
+    .price{
+      font-weight:700;
+      color:var(--red);
+      margin-bottom:10px;
+    }
+
+    .card-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+
+    form{
+      display:grid;
+      gap:14px;
+    }
+
+    input, select, textarea{
+      width:100%;
+      padding:12px 14px;
+      border:1px solid #ddd;
+      border-radius:12px;
+      background:#fff;
+      outline:none;
+    }
+
+    input:focus, select:focus, textarea:focus{
+      border-color: var(--green);
+    }
+
+    .two-col{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:20px;
+    }
+
+    .three-col{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:20px;
+    }
+
+    .muted{
+      color:var(--gray);
+      font-size:0.95rem;
+    }
+
+    .cart-list, .order-list, .user-list{
+      display:grid;
+      gap:12px;
+      margin-top:14px;
+    }
+
+    .list-item{
+      background:#f8fafc;
+      border:1px solid #e5e7eb;
+      padding:12px;
+      border-radius:12px;
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .hidden{
+      display:none !important;
+    }
+
+    .status{
+      display:inline-block;
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:0.85rem;
+      font-weight:700;
+      background:#e8f7eb;
+      color:var(--green);
+    }
+
+    .footer{
+      background: var(--green);
+      color: var(--white);
+      padding:28px 0;
+      margin-top:30px;
+    }
+
+    .footer p{
+      margin:6px 0;
+    }
+
+    .notice{
+      padding:12px 14px;
+      border-radius:12px;
+      margin-top:12px;
+      font-weight:700;
+    }
+
+    .success{
+      background:#e8f7eb;
+      color:var(--green);
+    }
+
+    .error{
+      background:#c55d18;
+      color:var(--red);
+    }
+
+    .small{
+      font-size:0.9rem;
+    }
+
+    .role-box{
+      border-left:6px solid var(--yellow);
+    }
+
+    @media (max-width: 900px){
+      .hero-wrap, .two-col, .three-col{
+        grid-template-columns:1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="container nav">
+      <div class="brand">Yegna <span>Breakfast</span></div>
+
+      <nav class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#menu">Menu</a>
+        <a href="#login">Login</a>
+        <a href="#register">Register</a>
+        <a href="#cart">Cart</a>
+        <a href="#staff">Staff</a>
+        <a href="#admin">Admin</a>
+        <a href="#contact">Contact</a>
+        <button id="logoutBtn" class="hidden">Logout</button>
+        <button class="cta-btn" onclick="scrollToSection('menu')">Order Now</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-wrap">
+        <div class="hero-text">
+          <h1>Hot ful, crispy food, and zero breakfast drama.</h1>
+          <p>
+            Welcome to <strong>Yegna Breakfast</strong> — your cozy Ethiopian breakfast spot with a
+            funny, casual vibe and a working ordering system that does not ghost your cart.
+          </p>
+
+          <div class="hero-badges">
+            <span class="badge">Fresh Ethiopian Breakfast</span>
+            <span class="badge">Customer hospitality</span>
+            <span class="badge">Cart + Orders</span>
+          </div>
+
+          <div class="hero-actions">
+            <button class="btn btn-primary" onclick="scrollToSection('menu')">See Menu</button>
+            <button class="btn btn-secondary" onclick="scrollToSection('login')">Login</button>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <img src="C:\Users\gasha\Downloads\logo.jpg" alt="Breakfast platter" />
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="menu">
+      <div class="container">
+        <h2 class="section-title">Menu</h2>
+        <p class="section-subtitle">Pick your breakfast champion. Your cart is ready.</p>
+
+        <div class="grid menu-grid" id="menuGrid"></div>
+      </div>
+    </section>
+
+    <section class="section" id="login">
+      <div class="container">
+        <h2 class="section-title">Login</h2>
+        <p class="section-subtitle">Customer, staff, or admin — same door, different access.</p>
+
+        <div class="two-col">
+          <div class="card">
+            <h3>Login to your account</h3>
+            <form id="loginForm">
+              <select id="loginRole" required>
+                <option value="">Select role</option>
+                <option value="customer">Customer</option>
+                <option value="staff">Staff</option>
+                <option value="admin">Admin</option>
+              </select>
+              <input type="text" id="loginUsername" placeholder="Username" required />
+              <input type="password" id="loginPassword" placeholder="Password" required />
+              <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+            <div id="loginMessage"></div>
+            <p class="muted small" style="margin-top:10px;">
+              Demo staff: <strong>kitchenpass / kitchen101</strong><br>
+              Demo admin: <strong>admin / admin123</strong>
+            </p>
+          </div>
+
+          <div class="card role-box">
+            <h3>Access levels</h3>
+            <p><strong>Customer:</strong> browse menu, add to cart, place orders.</p>
+            <p><strong>Staff:</strong> view and process orders.</p>
+            <p><strong>Admin:</strong> manage users, menu, and all orders.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="register">
+      <div class="container">
+        <h2 class="section-title">Registration</h2>
+        <p class="section-subtitle">New here? Join the breakfast club.</p>
+
+        <div class="card">
+          <form id="registerForm">
+            <div class="two-col">
+              <input type="text" id="registerName" placeholder="Full name" required />
+              <input type="text" id="registerUsername" placeholder="Choose username" required />
+            </div>
+            <div class="two-col">
+              <input type="email" id="registerEmail" placeholder="Email address" required />
+              <input type="password" id="registerPassword" placeholder="Create password" required />
+            </div>
+            <button type="submit" class="btn btn-secondary">Register as a Customer</button>
+          </form>
+          <div id="registerMessage"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="cart">
+      <div class="container">
+        <h2 class="section-title">Cart & Order Section</h2>
+        <p class="section-subtitle">Your selected breakfast goodies live here.</p>
+
+        <div class="two-col">
+          <div class="card">
+            <h3>Your Cart</h3>
+            <div id="cartList" class="cart-list"></div>
+            <p style="margin-top:14px;"><strong>Total: <span id="cartTotal">0</span> ETB</strong></p>
+            <div class="card-actions">
+              <button class="btn btn-danger" onclick="clearCart()">Clear Cart</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Place Your Order</h3>
+            <form id="orderForm">
+              <input type="text" id="orderCustomerName" placeholder="Your name" required />
+              <input type="tel" id="orderPhone" placeholder="Phone number" required />
+              <textarea id="orderAddress" rows="4" placeholder="Delivery address or pickup note" required></textarea>
+              <button type="submit" class="btn btn-primary">Place Order</button>
+            </form>
+            <div id="orderMessage"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section hidden" id="staff">
+      <div class="container">
+        <h2 class="section-title">Staff Dashboard</h2>
+        <p class="section-subtitle">For the breakfast heroes behind the scenes.</p>
+
+        <div class="card">
+          <h3>Incoming Orders</h3>
+          <div id="staffOrders" class="order-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section hidden" id="admin">
+      <div class="container">
+        <h2 class="section-title">Admin Dashboard</h2>
+        <p class="section-subtitle">Big boss breakfast controls live here.</p>
+
+        <div class="three-col">
+          <div class="card">
+            <h3>All Orders</h3>
+            <div id="adminOrders" class="order-list"></div>
+          </div>
+
+          <div class="card">
+            <h3>Users / Staff</h3>
+            <div id="adminUsers" class="user-list"></div>
+          </div>
+
+          <div class="card">
+            <h3>Manage Menu</h3>
+            <form id="menuForm">
+              <input type="text" id="menuItemName" placeholder="Item name" required />
+              <input type="number" id="menuItemPrice" placeholder="Price" required />
+              <input type="text" id="menuItemImage" placeholder="Image URL" required />
+              <button type="submit" class="btn btn-secondary">Add Menu Item</button>
+            </form>
+            <div id="menuManageMessage"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" id="contact">
+    <div class="container">
+      <h3>Contact Yegna Breakfast</h3>
+      <p>Addis Ababa, Ethiopia</p>
+      <p>Phone: 0984639306</p>
+      <p>Email: hello@yegnabreakfast.com</p>
+      <p class="small">Made with ful, fate, and a tiny bit of JavaScript chaos.</p>
+    </div>
+  </footer>
+
+  <script>
+    // =========================
+    // DEMO DATA
+    // =========================
+const defaultMenu = [
+      { 
+        id: 1, 
+        name: "Ful Normal", 
+        price: 150, 
+        image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=900&q=80" 
+      },
+      { 
+        id: 2, 
+        name: "Ful Special", 
+        price: 220, 
+        image: "https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=900&q=80" 
+      },
+      { 
+        id: 3, 
+        name: "Chechebsa", 
+        price: 180, 
+        image: "https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=900&q=80" 
+      },
+      { 
+        id: 4, 
+        name: "Egg Sandwich", 
+        price: 130, 
+        image: "https://images.unsplash.com/photo-1482049016688-2d3e1b311543?auto=format&fit=crop&w=900&q=80" 
+      },
+      { 
+        id: 5, 
+        name: "Bulla Genfo", 
+        price: 120, 
+        image: "https://images.unsplash.com/photo-1598514982205-f36b96d1e8d4?auto=format&fit=crop&w=900&q=80" 
+      },
+      { 
+        id: 6, 
+        name: "Kinche", 
+        price: 90, 
+        image: "https://images.unsplash.com/photo-1476500882210-a248356b2572?auto=format&fit=crop&w=900&q=80" 
+      },
+      { 
+        id: 7, 
+        name: "Tomato Omelet", 
+        price: 110, 
+        image: "https://images.unsplash.com/photo-1510629954389-c1e0da47d414?auto=format&fit=crop&w=900&q=80" 
+      },
+      { 
+        id: 8, 
+        name: "Fatira with Honey", 
+        price: 140, 
+        image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=900&q=80" 
+      },
+      { 
+        id: 9, 
+        name: "Fir-Fir (Injera)", 
+        price: 170, 
+        image: "https://images.unsplash.com/photo-1541014741259-df529411b96a?auto=format&fit=crop&w=900&q=80" 
+      }
+    ];
+
+    const defaultUsers = [
+      {
+        name: "Admin",
+        username: "admin",
+        email: "admin@yegna.com",
+        password: "admin123",
+        role: "admin"
+      },
+      {
+        name: "Kitchen Staff",
+        username: "kitchenpass",
+        email: "staff@yegna.com",
+        password: "kitchen101",
+        role: "staff"
+      }
+    ];
+
+    // =========================
+    // LOCAL STORAGE HELPERS
+    // =========================
+    function getStorage(key, fallback){
+      return JSON.parse(localStorage.getItem(key)) || fallback;
+    }
+
+    function setStorage(key, value){
+      localStorage.setItem(key, JSON.stringify(value));
+    }
+
+    function initAppData(){
+      if(!localStorage.getItem("menuItems")) setStorage("menuItems", defaultMenu);
+      if(!localStorage.getItem("users")) setStorage("users", defaultUsers);
+      if(!localStorage.getItem("orders")) setStorage("orders", []);
+      if(!localStorage.getItem("cart")) setStorage("cart", []);
+    }
+
+    // =========================
+    // STATE
+    // =========================
+    let currentUser = JSON.parse(localStorage.getItem("currentUser")) || null;
+    let menuItems = [];
+    let cart = [];
+    let orders = [];
+    let users = [];
+
+    // =========================
+    // UI HELPERS
+    // =========================
+    function scrollToSection(id){
+      document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+    }
+
+    function showMessage(targetId, message, type){
+      const el = document.getElementById(targetId);
+      el.innerHTML = `<div class="notice ${type}">${message}</div>`;
+    }
+
+    function refreshData(){
+      menuItems = getStorage("menuItems", defaultMenu);
+      cart = getStorage("cart", []);
+      orders = getStorage("orders", []);
+      users = getStorage("users", defaultUsers);
+    }
+
+    // =========================
+    // MENU
+    // =========================
+    function renderMenu(){
+      const menuGrid = document.getElementById("menuGrid");
+      menuGrid.innerHTML = "";
+
+      menuItems.forEach(item => {
+        const card = document.createElement("div");
+        card.className = "card menu-card";
+        card.innerHTML = `
+          <img src="${item.image}" alt="${item.name}">
+          <h3>${item.name}</h3>
+          <p class="price">${item.price} ETB</p>
+          <p class="muted">Tasty, warm, and probably the reason mornings still exist.</p>
+          <div class="card-actions">
+            <button class="btn btn-primary" onclick="addToCart(${item.id})">Add to Cart</button>
+          </div>
+        `;
+        menuGrid.appendChild(card);
+      });
+    }
+
+    function addToCart(id){
+      const item = menuItems.find(m => m.id === id);
+      if(!item) return;
+
+      cart.push(item);
+      setStorage("cart", cart);
+      renderCart();
+      showMessage("orderMessage", `${item.name} added to cart. Breakfast mission progressing nicely.`, "success");
+      scrollToSection("cart");
+    }
+
+    // =========================
+    // CART
+    // =========================
+    function renderCart(){
+      const cartList = document.getElementById("cartList");
+      const totalEl = document.getElementById("cartTotal");
+      cartList.innerHTML = "";
+
+      if(cart.length === 0){
+        cartList.innerHTML = `<p class="muted">Your cart is empty. That is honestly a little sad.</p>`;
+        totalEl.textContent = "0";
+        return;
+      }
+
+      let total = 0;
+
+      cart.forEach((item, index) => {
+        total += item.price;
+        const div = document.createElement("div");
+        div.className = "list-item";
+        div.innerHTML = `
+          <div>
+            <strong>${item.name}</strong>
+            <p class="muted">${item.price} ETB</p>
+          </div>
+          <button class="btn btn-danger" onclick="removeFromCart(${index})">Remove</button>
+        `;
+        cartList.appendChild(div);
+      });
+
+      totalEl.textContent = total;
+    }
+
+    function removeFromCart(index){
+      cart.splice(index, 1);
+      setStorage("cart", cart);
+      renderCart();
+    }
+
+    function clearCart(){
+      cart = [];
+      setStorage("cart", cart);
+      renderCart();
+      showMessage("orderMessage", "Cart cleared. A dramatic reset, but okay.", "success");
+    }
+
+    // =========================
+    // AUTH
+    // =========================
+    document.getElementById("registerForm").addEventListener("submit", function(e){
+      e.preventDefault();
+
+      const name = document.getElementById("registerName").value.trim();
+      const username = document.getElementById("registerUsername").value.trim();
+      const email = document.getElementById("registerEmail").value.trim();
+      const password = document.getElementById("registerPassword").value.trim();
+
+      refreshData();
+
+      const exists = users.some(user => user.username === username);
+      if(exists){
+        showMessage("registerMessage", "Username already exists. Pick another one.", "error");
+        return;
+      }
+
+      const newUser = {
+        name,
+        username,
+        email,
+        password,
+        role: "customer"
+      };
+
+      users.push(newUser);
+      setStorage("users", users);
+
+      showMessage("registerMessage", "Registration successful. You can now log in as a customer.", "success");
+      document.getElementById("registerForm").reset();
+      scrollToSection("login");
+    }); 
+document.getElementById("loginForm").addEventListener("submit", async function(e){
+  e.preventDefault();
+  const role = document.getElementById("loginRole").value;
+  const username = document.getElementById("loginUsername").value.trim();
+  const password = document.getElementById("loginPassword").value.trim();
+
+  try {
+    // This talks directly to your new Render backend
+    const res = await fetch('https://yegna-api.onrender.com/api/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password, role })
+    });
+
+    if(!res.ok) throw new Error("Unauthorized");
+    currentUser = await res.json();
+    localStorage.setItem("currentUser", JSON.stringify(currentUser));
+    
+    showMessage("loginMessage", "Welcome back!", "success");
+    updateAccessUI();
+    scrollToSection("home");
+  } catch (err) {
+    showMessage("loginMessage", "Login failed. Check your credentials.", "error");
+  }
+});
+    function updateAccessUI(){
+      const logoutBtn = document.getElementById("logoutBtn");
+      const staffSection = document.getElementById("staff");
+      const adminSection = document.getElementById("admin");
+
+      staffSection.classList.add("hidden");
+      adminSection.classList.add("hidden");
+      logoutBtn.classList.add("hidden");
+
+      if(currentUser){
+        logoutBtn.classList.remove("hidden");
+
+        if(currentUser.role === "staff"){
+          staffSection.classList.remove("hidden");
+        }
+
+        if(currentUser.role === "admin"){
+          adminSection.classList.remove("hidden");
+        }
+      }
+
+      renderStaffOrders();
+      renderAdminOrders();
+      renderUsers();
+    }
+
+    // =========================
+    // PLACE ORDER
+    // =========================
+    document.getElementById("orderForm").addEventListener("submit", function(e){
+      e.preventDefault();
+      refreshData();
+
+      const customerName = document.getElementById("orderCustomerName").value.trim();
+      const phone = document.getElementById("orderPhone").value.trim();
+      const address = document.getElementById("orderAddress").value.trim();
+
+      if(cart.length === 0){
+        showMessage("orderMessage", "You cannot place an empty order. The cart is literally empty.", "error");
+        return;
+      }
+
+      const total = cart.reduce((sum, item) => sum + item.price, 0);
+
+      const newOrder = {
+        id: Date.now(),
+        customerName,
+        phone,
+        address,
+        items: [...cart],
+        total,
+        status: "Pending",
+        createdAt: new Date().toLocaleString()
+      };
+
+      orders.push(newOrder);
+      setStorage("orders", orders);
+
+      cart = [];
+      setStorage("cart", cart);
+
+      renderCart();
+      renderStaffOrders();
+      renderAdminOrders();
+
+      showMessage("orderMessage", `Order placed successfully! Total: ${total} ETB. Breakfast is on the move.`, "success");
+      document.getElementById("orderForm").reset();
+    });
+
+    // =========================
+    // STAFF
+    // =========================
+    function renderStaffOrders(){
+      const staffOrders = document.getElementById("staffOrders");
+      staffOrders.innerHTML = "";
+
+      if(!currentUser || currentUser.role !== "staff"){
+        staffOrders.innerHTML = `<p class="muted">Staff login required.</p>`;
+        return;
+      }
+
+      if(orders.length === 0){
+        staffOrders.innerHTML = `<p class="muted">No orders yet. Either business is calm or everyone is still asleep.</p>`;
+        return;
+      }
+
+      orders.forEach(order => {
+        const div = document.createElement("div");
+        div.className = "list-item";
+        div.innerHTML = `
+          <div>
+            <strong>Order #${order.id}</strong>
+            <p><strong>${order.customerName}</strong> — ${order.phone}</p>
+            <p class="muted">${order.items.map(i => i.name).join(", ")}</p>
+            <p>Total: ${order.total} ETB</p>
+            <span class="status">${order.status}</span>
+          </div>
+          <div class="card-actions">
+            <button class="btn btn-secondary" onclick="updateOrderStatus(${order.id}, 'Processing')">Processing</button>
+            <button class="btn btn-primary" onclick="updateOrderStatus(${order.id}, 'Completed')">Completed</button>
+          </div>
+        `;
+        staffOrders.appendChild(div);
+      });
+    }
+
+    // =========================
+    // ADMIN
+    // =========================
+    function renderAdminOrders(){
+      const adminOrders = document.getElementById("adminOrders");
+      adminOrders.innerHTML = "";
+
+      if(!currentUser || currentUser.role !== "admin"){
+        adminOrders.innerHTML = `<p class="muted">Admin login required.</p>`;
+        return;
+      }
+
+      if(orders.length === 0){
+        adminOrders.innerHTML = `<p class="muted">No orders yet.</p>`;
+        return;
+      }
+
+      orders.forEach(order => {
+        const div = document.createElement("div");
+        div.className = "list-item";
+        div.innerHTML = `
+          <div>
+            <strong>#${order.id}</strong>
+            <p>${order.customerName} | ${order.phone}</p>
+            <p class="muted">${order.items.map(i => i.name).join(", ")}</p>
+            <p>Total: ${order.total} ETB</p>
+            <p>Status: <strong>${order.status}</strong></p>
+          </div>
+          <div class="card-actions">
+            <button class="btn btn-danger" onclick="deleteOrder(${order.id})">Delete</button>
+          </div>
+        `;
+        adminOrders.appendChild(div);
+      });
+    }
+
+    function renderUsers(){
+      const adminUsers = document.getElementById("adminUsers");
+      adminUsers.innerHTML = "";
+
+      if(!currentUser || currentUser.role !== "admin"){
+        adminUsers.innerHTML = `<p class="muted">Admin login required.</p>`;
+        return;
+      }
+
+      users.forEach(user => {
+        const div = document.createElement("div");
+        div.className = "list-item";
+        div.innerHTML = `
+          <div>
+            <strong>${user.name}</strong>
+            <p class="muted">${user.username} | ${user.email || "No email"} | ${user.role}</p>
+          </div>
+        `;
+        adminUsers.appendChild(div);
+      });
+    }
+
+    document.getElementById("menuForm").addEventListener("submit", function(e){
+      e.preventDefault();
+
+      if(!currentUser || currentUser.role !== "admin"){
+        showMessage("menuManageMessage", "Only admin can add menu items.", "error");
+        return;
+      }
+
+      const name = document.getElementById("menuItemName").value.trim();
+      const price = Number(document.getElementById("menuItemPrice").value);
+      const image = document.getElementById("menuItemImage").value.trim();
+
+      const newItem = {
+        id: Date.now(),
+        name,
+        price,
+        image
+      };
+
+      menuItems.push(newItem);
+      setStorage("menuItems", menuItems);
+
+      renderMenu();
+      showMessage("menuManageMessage", `${name} added to menu successfully.`, "success");
+      document.getElementById("menuForm").reset();
+    });
+
+    function updateOrderStatus(orderId, status){
+      refreshData();
+      const order = orders.find(o => o.id === orderId);
+      if(order){
+        order.status = status;
+        setStorage("orders", orders);
+        renderStaffOrders();
+        renderAdminOrders();
+      }
+    }
+
+    function deleteOrder(orderId){
+      refreshData();
+      orders = orders.filter(order => order.id !== orderId);
+      setStorage("orders", orders);
+      renderAdminOrders();
+      renderStaffOrders();
+    }
+
+    // =========================
+    // INIT
+    // =========================
+    function init(){
+      initAppData();
+      refreshData();
+      renderMenu();
+      renderCart();
+      updateAccessUI();
+    }
+
+    init();
+  </script>
+</body>
+</html>
